@@ -15,33 +15,38 @@
         headerImg.setAttribute("width",200);
         headerRow.appendChild(headerImg);
         // création navbar
-        let nav = document.createElement("nav")
-        nav.classList.add("navbar","navbar-expand")
-        nav.style.width ="350px";
-        headerRow.appendChild(nav)
+        let nav = document.createElement("nav");
+        nav.classList.add("navbar","navbar-expand");
+        headerRow.appendChild(nav);
 
-        let ulNav = document.createElement("ul")
-        ulNav.classList.add("navbar-nav")
-        nav.appendChild(ulNav)
+        let ulNav = document.createElement("ul");
+        ulNav.classList.add("navbar-nav");
+        nav.appendChild(ulNav);
 
-        let liNavActive = document.createElement("li")
-        liNavActive.classList.add("nav-item","active")
-        ulNav.appendChild(liNavActive)
+        let liNavActive = document.createElement("li");
+        liNavActive.classList.add("nav-item","active");
+        ulNav.appendChild(liNavActive);
 
-        let liNav = document.createElement("li")
-        liNav.classList.add("nav-item")
-        ulNav.appendChild(liNav)
+        let liNav = document.createElement("li");
+        liNav.classList.add("nav-item");
+        ulNav.appendChild(liNav);
+
+        let aNavActive = document.createElement("a");
+        aNavActive.setAttribute("href","index.html");
+        liNavActive.appendChild(aNavActive);
+
+        let aNav = document.createElement("a");
+        aNav.setAttribute("href","mon_panier.html");
+        liNav.appendChild(aNav);
 
         let btnNavActive = document.createElement("BUTTON");
         btnNavActive.setAttribute("type","button");
-        btnNavActive.setAttribute("href","index.html");
         btnNavActive.classList.add("btn","btn-primary","p-2","m-2","nabar-brand");
         btnNavActive.innerHTML= "Articles";
-        liNavActive.appendChild(btnNavActive);
+        aNavActive.appendChild(btnNavActive);
 
         let btnNav = document.createElement("BUTTON");
         btnNav.setAttribute("type","button");
-        btnNav.setAttribute("href","mon_panier.html");
         btnNav.classList.add("btn","btn-primary","p-2","m-2","nabar-brand");
         btnNav.innerHTML= "Panier";
-        liNav.appendChild(btnNav);
+        aNav.appendChild(btnNav);
