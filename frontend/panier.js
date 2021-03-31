@@ -10,7 +10,7 @@ request.onreadystatechange = function() {
         while (index<recupStorage.length) {
             const commande =document.querySelector('.commande');
             let teddysCommande = document.createElement("div");
-            teddysCommande.classList.add("card","border","border-success","m-1","text-center");
+            teddysCommande.classList.add("card","border","border-success","m-1","align-items-center");
             commande.appendChild(teddysCommande);
 
             let name = document.createElement("p");
@@ -30,11 +30,10 @@ request.onreadystatechange = function() {
             number.classList.add("col","font-weight-bold");
             teddysCommande.appendChild(number);
             prixTotal = prixTotal + recupStorage[index].prix*recupStorage[index].quantity;
-            console.log(prixTotal);
 
             let remove = document.createElement("BUTTON");
             remove.innerHTML="Retirer cette article";
-            remove.classList="w-50"
+            remove.classList=("w-25","mb-2","btn","btn-danger");
             teddysCommande.appendChild(remove);
             remove.addEventListener('click',() =>{
             })

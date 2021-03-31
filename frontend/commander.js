@@ -8,7 +8,7 @@ request.onreadystatechange = function() {
         let img =document.createElement("img");
         img.setAttribute ('src',response.imageUrl);
         img.setAttribute ('alt',"ours en peluche");
-        img.classList.add("mb-3","h-50");
+        img.classList.add("mb-3","h-25","shadow");
         img.style.width = "100%";
         items.appendChild(img);
 

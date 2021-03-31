@@ -30,29 +30,50 @@
             </div>
         </div>
     </header>
-    <div class="Allpanier ">
-        <div class=" containerPanier">
-            <div class="commande text-center"></div>
+    <div class="Allpanier row mt-5 align-items-center">
+        <div class="containerPanier col-md-12 col-lg-6" >
+            <div class="commande text-center align-items-center"></div>
             <p class="totalPrice"></p>
         </div>
-        <div class="containerFormulaire">
-            <form  class="" action="" method="post" class="formulaire mr-2">
-                <div class="text-center d-flex justify-content-end">
-                    <label for="name" class="mr-2">Nom :</label>
-                    <input type="text">
-                </div>
-                <div class="text-center d-flex justify-content-end">
-                    <label for="email" class="mr-2">Email :</label>
-                    <input type="email" name="email" id="email" required>
-                </div>
-                <div class="text-end d-flex justify-content-end">
-                    <label for="adresse" class="mr-2">Adresse :</label>
-                    <input type="text">
-                </div>
-            </form>
+        <div class="containerFormulaire col-lg-6 col-md-12">
+            <form id=paiement class="d-flex ml-4">
+                <fieldset class="ml-4">
+                  <legend>Votre identité</legend>
+                  <ul class="list-unstyled">
+                    <li>
+                      <label for=nom>Nom</label>
+                      <input id=nom name=nom type=text placeholder="Prénom et nom" required autofocus>
+                    </li>
+                    <li>
+                      <label for=email>Email</label>
+                      <input id=email name=email type=email placeholder="exemple@domaine.com" required>
+                    </li>
+                  </ul>
+                </fieldset>
+              
+                <fieldset class="ml-4">
+                  <legend>Adresse de livraison</legend>
+                    <ul class="list-unstyled w-75">
+                      <li>
+                        <label for=adresse>Adresse</label>
+                        <textarea id=adresse name=adresse rows=4 required></textarea>
+                      </li>
+                      <li>
+                        <label for=codepostal>Code postal</label>
+                        <input id=codepostal name=codepostal type=text required>
+                      </li>
+                        <li>
+                        <label for=pays>Pays</label>
+                        <input id=pays name=pays type=text required>
+                      </li>
+                    </ul>
+                  </fieldset>
         </div>
     </div>
-
+    <div class="d-flex align-items-center justify-content-center">
+        <button class="btn btn-success border border-dark">Passer la commande</button>
+    </div>
+    
     <script type="text/javascript" src="panier.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

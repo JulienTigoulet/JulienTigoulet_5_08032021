@@ -22,7 +22,7 @@ request.onreadystatechange = function() {
             let imgBlock = document.createElement("div");
             imgBlock.style.height = "100%";
             imgBlock.style.overflow = "hidden";
-            imgBlock.classList.add("border","border-success","rounded");
+            imgBlock.classList.add("border","border-success","rounded","shadow");
             card.appendChild(imgBlock);
 
             let img =document.createElement("img");
@@ -50,7 +50,7 @@ request.onreadystatechange = function() {
             card.appendChild(aCommander);
 
             let btnCommander =document.createElement("BUTTON");
-            btnCommander.classList.add("btn","btnCommander","btn-success","btnCommander");
+            btnCommander.classList.add("btn","btnCommander","btn-success","btnCommander","border","border-dark","shadow");
             btnCommander.setAttribute("type", "button");
             btnCommander.innerHTML = "Commander !";
             aCommander.appendChild(btnCommander);
