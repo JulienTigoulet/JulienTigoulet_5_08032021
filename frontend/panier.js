@@ -4,7 +4,7 @@ request.onreadystatechange = function() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
         var response = JSON.parse(this.responseText);
         let recupStorage= JSON.parse(window.localStorage.getItem("panier"));
-
+// Boucle card panier  LocalStorage récupération
         let index = 0;
         let prixTotal=0;
         while (index<recupStorage.length) {
@@ -31,19 +31,19 @@ request.onreadystatechange = function() {
             teddysCommande.appendChild(number);
             prixTotal = prixTotal + recupStorage[index].prix*recupStorage[index].quantity;
 
-            let remove = document.createElement("BUTTON");
-            remove.innerHTML="Retirer cette article";
-            remove.classList=("w-25","mb-2","btn","btn-danger");
-            teddysCommande.appendChild(remove);
-            remove.addEventListener('click',() =>{
-            })
             index++;
         }
+// Calcul du prix total
         let total = document.querySelector('.totalPrice');
         total.classList.add("col","font-weight-bold");
-        total.innerHTML="Prix Totale :"+" "+ prixTotal;
+        total.innerHTML="Prix Total :"+" "+ prixTotal;
     };
-  
+// reset panier
+    let annuler = document.querySelector('.cancel');
+    annuler.addEventListener('click', () => {
+        location.replace("index.html");
+        localStorage.clear();
+    });
 }
 request.open("GET", "http://localhost:3000/api/teddies");
 request.send();

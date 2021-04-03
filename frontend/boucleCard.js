@@ -3,15 +3,8 @@ var request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
         var response = JSON.parse(this.responseText);
-        // création cardContainer
-        let cardContainer = document.createElement("div");
-        cardContainer.classList.add("container");
-        document.body.appendChild(cardContainer);
-        // création rowContainer
-        let cardRow = document.createElement("div");
-        cardRow.classList.add("row");
-        cardContainer.appendChild(cardRow);
-        // création footer
+        let cardRow = document.querySelector('.creationCarte')
+        // création boucle API teddies
         let index = 0;
         while (index<response.length){
 

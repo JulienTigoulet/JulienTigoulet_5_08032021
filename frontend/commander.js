@@ -48,7 +48,7 @@ request.onreadystatechange = function() {
                 verificationStorage.push(panier)
             }
             localStorage.setItem("panier", JSON.stringify(verificationStorage));
-            window.alert("Votre commande pour"+" "+ response.name +" " +"en" +" "+ valeur +" "+" exemplaire(s), à bien était ajouté a votre panier");
+            window.alert("Votre commande pour"+" "+ response.name +" " +"en" +" "+ valeur +" "+" exemplaire(s), a bien été ajouté à votre panier");
         })
 // boucle quantité
         let indexe = 1;
@@ -71,7 +71,7 @@ request.onreadystatechange = function() {
                 select.appendChild(couleur);
                 index++;
             }
-                
+
 };
 }
 let params = new URLSearchParams(location.search);
