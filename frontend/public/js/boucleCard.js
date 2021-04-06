@@ -1,8 +1,6 @@
-        
-var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        var response = JSON.parse(this.responseText);
+
+get("http://localhost:3000/api/teddies").then((response) =>{
+
         let cardRow = document.querySelector('.creationCarte')
         // création boucle API teddies
         let index = 0;
@@ -49,8 +47,5 @@ request.onreadystatechange = function() {
             aCommander.appendChild(btnCommander);
             index++;   
         }
-    }
-};
-request.open("GET", "http://localhost:3000/api/teddies");
-request.send();
-
+    });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
