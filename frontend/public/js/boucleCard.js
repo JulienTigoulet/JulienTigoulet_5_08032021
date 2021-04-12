@@ -1,9 +1,10 @@
-
+// récupération de l'api request.js
 get("http://localhost:3000/api/teddies").then((response) =>{
-
-        let cardRow = document.querySelector('.creationCarte')
+        // création cardRow --> Rangement des card
+        const cardRow = document.querySelector('.creationCarte')
         // création boucle API teddies
         let index = 0;
+        // boucle sur la lenght de l'api, créer chaque card
         while (index<response.length){
 
             let card = document.createElement("div");
@@ -28,7 +29,7 @@ get("http://localhost:3000/api/teddies").then((response) =>{
             card.appendChild(name);
 
             let price =document.createElement("p");
-            price.innerHTML = "Prix : " + response[index].price;
+            price.innerHTML = "Prix : " + response[index].price/100+"€";;
             price.classList.add("font-weight-bold")
             card.appendChild(price);
 
@@ -38,12 +39,13 @@ get("http://localhost:3000/api/teddies").then((response) =>{
 
             let aCommander = document.createElement("a");
             aCommander.setAttribute("href","commander.html?id="+ response[index]._id);
+            aCommander.classList.add("d-flex","justify-content-center")
             card.appendChild(aCommander);
 
             let btnCommander =document.createElement("BUTTON");
             btnCommander.classList.add("btn","btnCommander","btn-success","btnCommander","border","border-dark","shadow");
             btnCommander.setAttribute("type", "button");
-            btnCommander.innerHTML = "Commander !";
+            btnCommander.innerHTML = "Commander ";
             aCommander.appendChild(btnCommander);
             index++;   
         }
