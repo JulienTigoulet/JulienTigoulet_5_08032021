@@ -1,53 +1,27 @@
 // récupération de l'api request.js
-get("http://localhost:3000/api/teddies").then((response) =>{
-        // création cardRow --> Rangement des card
-        const cardRow = document.querySelector('.creationCarte')
-        // création boucle API teddies
-        let index = 0;
-        // boucle sur la lenght de l'api, créer chaque card
-        while (index<response.length){
-
-            let card = document.createElement("div");
-            card.classList.add("teddy",[index],"card","col-lg-2","col-md-3","m-2", "border-0");
-            cardRow.appendChild(card);
-
-            let imgBlock = document.createElement("div");
-            imgBlock.style.height = "100%";
-            imgBlock.style.overflow = "hidden";
-            imgBlock.classList.add("border","border-success","rounded","shadow");
-            card.appendChild(imgBlock);
-
-            let img =document.createElement("img");
-            img.setAttribute ('src',response[index].imageUrl);
-            img.setAttribute ('alt',"ours en peluche");
-            img.style.width = "100%";
-            imgBlock.appendChild(img);
-
-            let name =document.createElement("p");
-            name.innerHTML = response[index].name;
-            name.classList.add("mt-1","font-weight-bold");
-            card.appendChild(name);
-
-            let price =document.createElement("p");
-            price.innerHTML = "Prix : " + response[index].price/100+"€";;
-            price.classList.add("font-weight-bold")
-            card.appendChild(price);
-
-            let description =document.createElement("p");
-            description.innerHTML = response[index].description;
-            card.appendChild(description);
-
-            let aCommander = document.createElement("a");
-            aCommander.setAttribute("href","commander.html?id="+ response[index]._id);
-            aCommander.classList.add("d-flex","justify-content-center")
-            card.appendChild(aCommander);
-
-            let btnCommander =document.createElement("BUTTON");
-            btnCommander.classList.add("btn","btnCommander","btn-success","btnCommander","border","border-dark","shadow");
-            btnCommander.setAttribute("type", "button");
-            btnCommander.innerHTML = "Commander ";
-            aCommander.appendChild(btnCommander);
-            index++;   
-        }
+get("http://localhost:3000/api/teddies").then((responses) =>{
+    // Appel de toute les cards
+    responses.forEach(response => {
+        
+        cardEntier(response)
     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+});
+// création html+api de toute les cards
+const cardEntier = (response)=>{
+    const cardRow = document.querySelector('.creationCarte');
+    cardRow.innerHTML+=
+    `
+    <div class="card col-lg-3 col-md-4 m-2 shadow" style="width: 18rem;">
+    <div style="overflow: hidden;max-height: 145px; width: 100%" class="rounded">
+        <img src="${response.imageUrl}" class="card-img-top" style="width: 100%; alt="${response.name}, un ours en Peluche">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">${response.name}</h5>
+        <h5 class="card-title">${response.price/100+"€"}</h5>
+        <p class="card-text">${response.description}</p>
+        <a href="commander.html?id=${response._id}" class="btn btn-primary">Voir l'article</a>
+    </div>
+    </div>
+    `
+};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

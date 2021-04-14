@@ -1,112 +1,127 @@
-    // récupération localstorage
-    let recupStorage= JSON.parse(window.localStorage.getItem("panier"));
-
-    // alert panier vide
-    const emptyBasket = ()=>{
-        if (recupStorage == null) {
-            alert("Vous n'avez aucun article dans votre panier")
-            location.replace("index.html");
-        }
+// récupération localstorage
+let recupStorage= JSON.parse(window.localStorage.getItem("panier"));
+//redirection si aucun article est dans le panier
+const emptyBasket = (recupStorage)=>{
+    if (recupStorage == null) {
+        location.replace("index.html");
     }
-    emptyBasket()
-    // Value basket 
-    let index = 0;
-    let prixTotal=0;
-    let products = [];
-    let quantity = recupStorage[index].quantity;
-
-    // Boucle création panier ->recupStorage et response
-    while (index<recupStorage.length) {
-        let id = recupStorage[index].id
-        const commande =document.querySelector('.commande');
-        let teddysCommande = document.createElement("div");
-        teddysCommande.classList.add("card","col-lg-2","col-md-3","m-2","shadow")
-        get("http://localhost:3000/api/teddies/" +id).then((response)=> {
-            //création du nom par article
-            let name = document.createElement("p");
-            name.classList.add("font-weight-bold");
-            name.innerHTML= response.name
-            teddysCommande.appendChild(name);
-            //création de la photo par article
-            let img = document.createElement("img");
-            img.classList.add("w-50")
-            img.setAttribute ('src',response.imageUrl);
-            img.setAttribute ('alt',"ours en peluche");
-            teddysCommande.appendChild(img);
-            // création du prix par article
-            let price = document.createElement("p");
-            price.classList.add("font-weight-bold", "prix");
-            price.innerHTML="Prix :"+" "+ response.price/100+"€";
-            price.setAttribute("id","prix")
-            teddysCommande.appendChild(price);
-            prixTotal= prixTotal + response.price*quantity;
-            // Calcul du prix total
-            let total = document.querySelector('.totalPrice');
-            total.classList.add("font-weight-bold");
-            total.innerHTML="Prix Total :"+" "+ prixTotal/100+"€";
-        });
-        teddysCommande.classList.add("card","border","border-success","m-1","align-items-center");
-        commande.appendChild(teddysCommande);
-        // création de la quantité par article
-        let number = document.createElement("p");
-        number.innerHTML="Article(s) :"+" "+ recupStorage[index].quantity
-        number.classList.add("font-weight-bold");
-        teddysCommande.appendChild(number);
-        products.push(recupStorage[index].id)
-        index++;
-    }
-    // reset panier , annuler commande
-    let annuler = document.querySelector('.cancel');
-    annuler.addEventListener('click', () => {
-    location.replace("index.html");
-    localStorage.clear();
+}
+emptyBasket(recupStorage)
+let prixTotal=0;
+let products = [];
+const commande =document.querySelector('.commande');
+// Boucle créer toute les articles mis dans le panier
+recupStorage.forEach(id => {
+    get("http://localhost:3000/api/teddies/" +id.id).then((response)=> {
+    cardPanier(response,id)
+    calculDuPrixTotal(response,id)
+    products.push(id.id)
     });
-    // validation formulaire
-    let formulaire = document.querySelector(".btnPasserCommande");
-    formulaire.addEventListener('click',verifValidation)
-    function verifValidation(event) {
-        // Vérification de la validété du nom puis email puis adresse puis ville puis prénom
-        if (document.formulaire.nom.validity.valueMissing){
-            alert("Merci de remplir votre nom")   
-        }else if (document.formulaire.email.validity.valueMissing) {
-            event.preventDefault();
-            alert("Merci de remplir votre email")
-        }else if (document.formulaire.adresse.validity.valueMissing) {
-            event.preventDefault();
-            alert("Merci de remplir votre adresse")
-        }
-        else if (document.formulaire.ville.validity.valueMissing) {
-            event.preventDefault();
-            alert("Merci de remplir votre ville")
-        }else if (document.formulaire.prenom.validity.valueMissing) {
-            event.preventDefault();
-            alert("Merci de remplir le prénom")
-        }
-        // Tout valide création de l'object contact et envoie en local storage
-        else{
-            event.preventDefault();
-            const contact ={
-                firstName: document.getElementById('prenom').value,
-                lastName: document.getElementById('nom').value,
-                address: document.getElementById('adresse').value,
-                city: document.getElementById('ville').value,
-                email: document.getElementById('email').value,
-            };
-            fetch("http://localhost:3000/api/teddies/order",
-                {
-                method :"POST",
-                body:JSON.stringify({contact,products}),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                    }
-                })
-            //function création local storage --> rediction page validation 
-            .then(response => response.json())
-            .then(response => localStorage.setItem("idOrder", JSON.stringify(response)))
-            setTimeout(()=>{
-                window.location.replace("validation.html")
-            },1000);
-        }   
+});
+// reset panier = annuler commande
+let annuler = document.querySelector('.cancel');
+annuler.addEventListener('click', () => {
+location.replace("index.html");
+localStorage.clear();
+});
+// validation formulaire
+let formulaire = document.querySelector(".btnPasserCommande");
+formulaire.addEventListener('click',verifValidation);
+
+const cardPanier = (response,id)=>{
+    const containerCard = document.querySelector('.commande')
+    containerCard.innerHTML+=
+        `
+        <div class="card col-lg-3 col-md-4 m-2 shadow" style="width: 18rem;">
+        <div style="overflow: hidden;max-height: 145px; width: 100%" class="rounded">
+            <img src="${response.imageUrl}" style="width: 100%;" class="card-img-top" alt="${response.name}, un ours en Peluche">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">${response.name}</h5>
+            <h5 class="card-title">${response.price/100+"€"}</h5>
+            <h5 class="card-title">Article(s) : ${id.quantity}</h5>
+        </div>
+        </div>
+        `  
+}
+// function Calcul du prix total
+const calculDuPrixTotal=(response,id)=>{
+    prixTotal= prixTotal + response.price*id.quantity;
+    let total = document.querySelector('.totalPrice');
+    total.classList.add("font-weight-bold");
+    total.innerHTML="Prix Total :"+" "+ prixTotal/100+"€";
+}
+// function Verification des données rentré au formulaire de contact
+function verifValidation(event) {
+    let alertNom =document.querySelector('.alertNom')
+    let alertPrenom =document.querySelector('.alertPrenom')
+    let alertEmail =document.querySelector('.alertEmail ')
+    let alertAdresse =document.querySelector('.alertAdresse')
+    let alertVille =document.querySelector('.alertVille')
+    if (nom.validity.valueMissing){
+        alertNom.innerHTML="Merci de remplir votre nom"
+        alertNom.classList.add("d-block")
+    }else if (nom.validity.patternMismatch){
+        alertNom.innerHTML="Erreur sur l'écriture"
+        alertNom.classList.add("d-block")
+
+    }else if (prenom.validity.valueMissing){
+        alertNom.classList.remove("d-block")
+        alertPrenom.innerHTML="Merci de remplir votre Prénom"
+        alertPrenom.classList.add("d-block")
+    }else if (prenom.validity.patternMismatch){
+        alertPrenom.innerHTML="Erreur sur l'écriture"
+        alertPrenom.classList.add("d-block")
+
+    }else if (email.validity.valueMissing){
+        alertPrenom.classList.remove("d-block")
+        alertEmail.innerHTML="Merci de remplir votre Email"
+        alertEmail.classList.add("d-block")
+    }else if (email.validity.typeMismatch){
+        alertEmail.innerHTML="Erreur sur l'écriture"
+        alertEmail.classList.add("d-block")
+
+    }else if (adresse.validity.valueMissing){
+        alertEmail.classList.remove("d-block")
+        alertAdresse.innerHTML="Merci de remplir votre Adresse"
+        alertAdresse.classList.add("d-block")
+    }else if (adresse.validity.patternMismatch){
+        alertAdresse.innerHTML="Erreur sur l'écriture"
+        alertAdresse.classList.add("d-block")
+        
+    }else if (ville.validity.valueMissing){
+        alertAdresse.classList.remove("d-block")
+        alertVille.innerHTML="Merci de remplir votre Ville"
+        alertVille.classList.add("d-block")
+    }else if (ville.validity.patternMismatch){
+        alertVille.innerHTML="Erreur sur l'écriture"
+        alertVille.classList.add("d-block")
     }
- 
+    // Tout valide création de l'object contact et envoie en local storage
+    else{
+        event.preventDefault();
+        const contact ={
+            firstName: document.getElementById('prenom').value,
+            lastName: document.getElementById('nom').value,
+            address: document.getElementById('adresse').value,
+            city: document.getElementById('ville').value,
+            email: document.getElementById('email').value,
+        };
+        // Post de contact(formulaire) et de product(id des teddies)
+        fetch("http://localhost:3000/api/teddies/order",
+            {
+            method :"POST",
+            body:JSON.stringify({contact,products}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                }
+            })
+        //function création local storage --> rediction page validation 
+        .then(response => response.json())
+        .then(response => {
+            localStorage.setItem("idOrder", JSON.stringify(response));
+            window.location.replace("validation.html");
+        })
+    }   
+}
