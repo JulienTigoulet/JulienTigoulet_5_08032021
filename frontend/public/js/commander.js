@@ -5,10 +5,10 @@ const id =params.get('id');
 get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
     // création de la cardCommander
     const btnCommander = document.querySelector('.btnCommander');
-    cardCommander(response)
+    cardCommander(response);
     const prixTeddies = document.querySelector('.quantite');
     //calcule du prix total pour un
-    let prixUn = document.querySelector('.prixTotal')
+    let prixUn = document.querySelector('.prixTotal');
     prixUn.textContent ="Prix total :"+' '+response.price/100+"€"
     // calcule du prix total en prenant en compte le select 
     prixTeddies.addEventListener('change', (event) => {
@@ -18,7 +18,7 @@ get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
     });
     // Au moment de l'ajout au panier
     btnCommander.addEventListener('click', () => {
-        btnCommander.classList.add('d-none')
+        btnCommander.classList.add('d-none');
         let verificationStorage = JSON.parse(localStorage.getItem("panier"));
         // Si storage vide création d'un verificationStorage
         if(verificationStorage == null)verificationStorage = [];
@@ -42,14 +42,14 @@ get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
         }
         localStorage.setItem("panier", JSON.stringify(verificationStorage));
         // alert commande bien effectué
-        let alert = document.querySelector('.alert')
-        alert.classList.add("d-block")
+        let alert = document.querySelector('.alert');
+        alert.classList.add("d-block");
         alert.innerHTML =
         "Votre commande pour"+" "+ response.name +" " +"en" +" "+ valeur +" "+" exemplaire(s), a bien été ajouté à votre panier"
         let btnPanier=document.querySelector('.btnPanier')
-        btnPanier.classList.remove("d-none")
+        btnPanier.classList.remove("d-none");
     })
-    // function boucle couleur
+    // boucle couleur
    response.colors.forEach(color => {
         let select = document.querySelector('.selecteurColor');
         let couleur = document.createElement("option");
@@ -58,9 +58,9 @@ get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
     }); 
 
 });
-// création de la card en html
+// création de la card en html-->commander.html
 const cardCommander = (response)=>{
-    const containerCard = document.querySelector('.theCard')
+    const containerCard = document.querySelector('.theCard');
     containerCard.innerHTML=
         `
         <div class="card text-center shadow" style="width: 300px;">
@@ -74,6 +74,3 @@ const cardCommander = (response)=>{
         </div>
         `  
     }
-
-
-

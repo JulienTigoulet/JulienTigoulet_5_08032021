@@ -1,21 +1,20 @@
 // récupération localstorage
 let recupStorage= JSON.parse(window.localStorage.getItem("panier"));
-//redirection si aucun article est dans le panier
+// redirection-->index.html si aucun article est dans le panier
 const emptyBasket = (recupStorage)=>{
     if (recupStorage == null) {
         location.replace("index.html");
     }
-}
+};
 emptyBasket(recupStorage)
 let prixTotal=0;
 let products = [];
-const commande =document.querySelector('.commande');
-// Boucle créer toute les articles mis dans le panier
+// Boucle creation toute les articles mis dans le panier
 recupStorage.forEach(id => {
     get("http://localhost:3000/api/teddies/" +id.id).then((response)=> {
-    cardPanier(response,id)
-    calculDuPrixTotal(response,id)
-    products.push(id.id)
+    cardPanier(response,id);
+    calculDuPrixTotal(response,id);
+    products.push(id.id);
     });
 });
 // reset panier = annuler commande
@@ -27,9 +26,9 @@ localStorage.clear();
 // validation formulaire
 let formulaire = document.querySelector(".btnPasserCommande");
 formulaire.addEventListener('click',verifValidation);
-
+// création card html -->mon_panier.html
 const cardPanier = (response,id)=>{
-    const containerCard = document.querySelector('.commande')
+    const containerCard = document.querySelector('.commande');
     containerCard.innerHTML+=
         `
         <div class="card col-lg-3 col-md-4 m-2 shadow" style="width: 18rem;">
@@ -48,16 +47,15 @@ const cardPanier = (response,id)=>{
 const calculDuPrixTotal=(response,id)=>{
     prixTotal= prixTotal + response.price*id.quantity;
     let total = document.querySelector('.totalPrice');
-    total.classList.add("font-weight-bold");
     total.innerHTML="Prix Total :"+" "+ prixTotal/100+"€";
 }
 // function Verification des données rentré au formulaire de contact
 function verifValidation(event) {
-    let alertNom =document.querySelector('.alertNom')
-    let alertPrenom =document.querySelector('.alertPrenom')
-    let alertEmail =document.querySelector('.alertEmail ')
-    let alertAdresse =document.querySelector('.alertAdresse')
-    let alertVille =document.querySelector('.alertVille')
+    let alertNom =document.querySelector('.alertNom');
+    let alertPrenom =document.querySelector('.alertPrenom');
+    let alertEmail =document.querySelector('.alertEmail ');
+    let alertAdresse =document.querySelector('.alertAdresse');
+    let alertVille =document.querySelector('.alertVille');
     if (nom.validity.valueMissing){
         alertNom.innerHTML="Merci de remplir votre nom"
         alertNom.classList.add("d-block")
@@ -124,4 +122,4 @@ function verifValidation(event) {
             window.location.replace("validation.html");
         })
     }   
-}
+};

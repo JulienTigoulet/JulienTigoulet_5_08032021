@@ -1,3 +1,4 @@
+//request de l'api
 const get = (url) =>{
     return new Promise((resolve,reject) => {
         var request = new XMLHttpRequest();
