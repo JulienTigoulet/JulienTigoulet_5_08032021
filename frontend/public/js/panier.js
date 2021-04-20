@@ -1,35 +1,35 @@
 // récupération localstorage
-let recupStorage= JSON.parse(window.localStorage.getItem("panier"));
+let recuperationStorage= JSON.parse(window.localStorage.getItem("panier"));
 // redirection-->index.html si aucun article est dans le panier
 const emptyBasket = (recupStorage)=>{
     if (recupStorage == null) {
         location.replace("index.html");
     }
 };
-emptyBasket(recupStorage)
+emptyBasket(recuperationStorage)
 let prixTotal=0;
 let products = [];
 // Boucle creation toute les articles mis dans le panier
-recupStorage.forEach(id => {
+recuperationStorage.forEach(id => {
     get("http://localhost:3000/api/teddies/" +id.id).then((response)=> {
-    cardPanier(response,id);
-    calculDuPrixTotal(response,id);
-    products.push(id.id);
+        displayProducts(response,id);
+        calculDuPrixTotal(response,id);
+        products.push(id.id);
     });
 });
 // reset panier = annuler commande
-let annuler = document.querySelector('.cancel');
-annuler.addEventListener('click', () => {
-location.replace("index.html");
-localStorage.clear();
+let cancel = document.querySelector('.cancel');
+cancel.addEventListener('click', () => {
+    location.replace("index.html");
+    localStorage.clear();
 });
 // validation formulaire
 let formulaire = document.querySelector(".btnPasserCommande");
-formulaire.addEventListener('click',verifValidation);
-// création card html -->mon_panier.html
-const cardPanier = (response,id)=>{
-    const containerCard = document.querySelector('.commande');
-    containerCard.innerHTML+=
+formulaire.addEventListener('click',verificationValidationFormulaire);
+// fonction des produits en html -->mon_panier.html
+const displayProducts = (response,id)=>{
+    const containerProducts = document.querySelector('.commande');
+    containerProducts.innerHTML+=
         `
         <div class="card col-lg-3 col-md-4 m-2 shadow" style="width: 18rem;">
         <div style="overflow: hidden;max-height: 145px; width: 100%" class="rounded">
@@ -50,7 +50,7 @@ const calculDuPrixTotal=(response,id)=>{
     total.innerHTML="Prix Total :"+" "+ prixTotal/100+"€";
 }
 // function Verification des données rentré au formulaire de contact
-function verifValidation(event) {
+function verificationValidationFormulaire(event) {
     let alertNom =document.querySelector('.alertNom');
     let alertPrenom =document.querySelector('.alertPrenom');
     let alertEmail =document.querySelector('.alertEmail ');

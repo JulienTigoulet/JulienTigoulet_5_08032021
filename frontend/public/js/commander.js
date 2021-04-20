@@ -3,15 +3,15 @@ let params = new URLSearchParams(location.search);
 const id =params.get('id');
 // récupération de l'api --> request.js
 get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
-    // création de la cardCommander
+    // création du product
     const btnCommander = document.querySelector('.btnCommander');
-    cardCommander(response);
-    const prixTeddies = document.querySelector('.quantite');
+    product(response);
+    const priceTeddie = document.querySelector('.quantite');
     //calcule du prix total pour un
-    let prixUn = document.querySelector('.prixTotal');
-    prixUn.textContent ="Prix total :"+' '+response.price/100+"€"
+    let selectPrice = document.querySelector('.prixTotal');
+    selectPrice.textContent ="Prix total :"+' '+response.price/100+"€"
     // calcule du prix total en prenant en compte le select 
-    prixTeddies.addEventListener('change', (event) => {
+    priceTeddie.addEventListener('change', (event) => {
         const result = document.querySelector('.prixTotal');
         prixTotal=`${event.target.value*response.price/100+"€"}`
         result.textContent ="Prix total :"+' '+prixTotal 
@@ -58,10 +58,10 @@ get("http://localhost:3000/api/teddies/"+ id).then((response) =>{
     }); 
 
 });
-// création de la card en html-->commander.html
-const cardCommander = (response)=>{
-    const containerCard = document.querySelector('.theCard');
-    containerCard.innerHTML=
+// création du container en html-->commander.html
+const product = (response)=>{
+    const containerProduct = document.querySelector('.theCard');
+    containerProduct.innerHTML=
         `
         <div class="card text-center shadow" style="width: 300px;">
         <div style="overflow: hidden;" class="rounded">

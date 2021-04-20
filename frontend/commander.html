@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
-    <title>Commander-Orinoco</title>
-</head>
-<body>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
+      <title>Commander-Orinoco</title>
+  </head>
+  <body>
     <header>
       <div class="container-fluid text-center mb-2 mt-2">
         <img src="./public/img/logo.png" alt="Logo Orinoco" width="200" class="border rounded shadow ">
@@ -30,36 +30,36 @@
             </div>
           </nav>
     </header>
-    <div class="container text-center">
-        <div class="theCard container-fluid d-flex justify-content-center p-1">
-            <!-- création card -->
-        </div>
-        <div class=" couleur">
-            <label for="">Couleurs</label>
-            <select name="Couleur" id="Color" class="border rounded m-2 form-select selecteurColor" aria-label="Default select example"></select>
-        </div>
-        <div>
-            <label for="">Quantités</label>
-            <select class="border rounded quantite m-2 form-select" id="quantite" aria-label="Default select example"style="width: 95px">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-    </div>
-    <div class="d-none alert alert-success text-center" role="alert"> 
+      <div class="container text-center">
+          <div class="theCard container-fluid d-flex justify-content-center p-1">
+              <!-- création card -->
+          </div>
+          <div class=" couleur">
+              <label for="">Couleurs</label>
+              <select name="Couleur" id="Color" class="border rounded m-2 form-select selecteurColor" aria-label="Default select example"></select>
+          </div>
+          <div>
+              <label for="">Quantités</label>
+              <select class="border rounded quantite m-2 form-select" id="quantite" aria-label="Default select example"style="width: 95px">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+          </div>
       </div>
-      <div class="prixTotal text-center">Prix Total</div>
-    <div class="boutonCommande container-fluid text-center">
-        <button type="button" class="m-2 btn btnCommander btn-success btnCommander">Ajouter au panier <i class="fas fa-cart-arrow-down"></i></button>
-        <a href="mon_panier.html"><button type="button" class="m-2 btn btnPanier btn-success btnCommander d-none">Aller au panier <i class="fas fa-shopping-basket"></i></button></a>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/request.js"></script>
-    <script type="text/javascript" src="./public/js/commander.js"></script>
-</body>
+      <div class="d-none alert alert-success text-center" role="alert"> 
+        </div>
+        <div class="prixTotal text-center">Prix Total</div>
+      <div class="boutonCommande container-fluid text-center">
+          <button type="button" class="m-2 btn btnCommander btn-success btnCommander">Ajouter au panier <i class="fas fa-cart-arrow-down"></i></button>
+          <a href="mon_panier.html"><button type="button" class="m-2 btn btnPanier btn-success btnCommander d-none">Aller au panier <i class="fas fa-shopping-basket"></i></button></a>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="./public/js/request.js"></script>
+      <script type="text/javascript" src="./public/js/commander.js"></script>
+  </body>
 </html>
