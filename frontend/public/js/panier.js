@@ -1,16 +1,16 @@
 // récupération localstorage
-let recuperationStorage= JSON.parse(window.localStorage.getItem("panier"));
+let panier= JSON.parse(window.localStorage.getItem("panier"));
 // redirection-->index.html si aucun article est dans le panier
 const emptyBasket = (recupStorage)=>{
     if (recupStorage == null) {
         location.replace("index.html");
     }
 };
-emptyBasket(recuperationStorage)
+emptyBasket(panier)
 let prixTotal=0;
 let products = [];
 // Boucle creation toute les articles mis dans le panier
-recuperationStorage.forEach(id => {
+panier.forEach(id => {
     get("http://localhost:3000/api/teddies/" +id.id).then((response)=> {
         displayProducts(response,id);
         calculDuPrixTotal(response,id);
